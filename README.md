@@ -15,3 +15,4 @@ No additional setup is required beyond having this workflow in your repository. 
 ## Usage
 
 - Open a pull request and add the `test` label to trigger an automatic Copilot review.
+- When new commits are pushed to a PR with the `test` label, Copilot review is automatically re-triggered.
