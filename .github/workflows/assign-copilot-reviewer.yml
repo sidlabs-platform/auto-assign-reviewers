@@ -1,0 +1,20 @@
+name: Auto Assign Copilot Reviewer
+
+on:
+  pull_request:
+    types: [opened, labeled]
+
+jobs:
+  assign-copilot-reviewer:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'test')
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Request Copilot Review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr edit ${{ github.event.pull_request.number }} \
+            --repo ${{ github.repository }} \
+            --add-reviewer "copilot"
